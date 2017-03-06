@@ -13,17 +13,17 @@ public class Main {
 
     public static void main(String[] args) {
         for (int i = 0; i < 10; i++) {
-            new Thread(new MyThread(i)).start();
+            new Thread(new ThreadAddMult(i)).start();
         }
     }
 
 }
 
-class MyThread implements Runnable {
+class ThreadAddMult implements Runnable {
 
     int id;
 
-    public MyThread(int id) {
+    public ThreadAddMult(int id) {
         this.id = id;
     }
 
@@ -54,15 +54,11 @@ class MyThread implements Runnable {
         Main.ticketAddition[id] = 0;
 
         while(Main.counter < 10){
-//            System.out.println(id + "stuck");
-            Thread.yield();
+            System.out.print("");
             emptyMethod();
         }
-        System.out.println("TEN TIMES");
 
         for (int i = 0; i < 10; i++) {
-            if (i == id) {continue;}
-            while (Main.choosing[i]) { emptyMethod(); }
             while (Main.ticketMult[i] != 0 && Main.ticketMult[i] < Main.ticketMult[id]) { emptyMethod();}
             if (Main.ticketMult[i] == Main.ticketMult[id] && i < id) {
 
